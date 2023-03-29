@@ -22,7 +22,13 @@ class AppSettings : PersistentStateComponent<AppSettings> {
     private val openAITokenTitle = "OpenAIToken"
     private val openAIPromptTitle = "OpenAIPrompt"
 
-    private var defaultPrompt = "As a professional developer working with a Git repository, it's important to maintain clear and concise commit messages that follow the standard format. Please create a commit message for the following changes: {diffs}. Remember to label everything logically and keep it short. Please use the following format <type>(<scope>): <short> \n\n [...]'. And here's a helpful hint from another developer: {hint}. Maybe you can use it to help you write your commit message."
+    private var defaultPrompt = "Write a git commit message. " +
+            "Use the conventional commit convention and follow best practices to maintain clear and concise commit messages. " +
+            "The format have to be 'type(scope): short' and should not exceed 74 characters.\n" +
+            "Generate a meaningful commit message for the given changes in '''{diffs}'''. " +
+            "Please describe the changes briefly and why they were made in the present tense.\n" +
+            "If available, use the hints provided by the user in '''{hint}''' to help you write the commit message.\n" +
+            "Remember, do not preface the commit with anything and add a short description of why the commit was done after the commit message."
 
     var requestSupport = true
 
