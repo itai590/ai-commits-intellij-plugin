@@ -53,6 +53,7 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
                     { AppSettings.instance.savePrompt(it) }
                 )
                 .align(Align.FILL)
+                .resizableColumn()
         }
     }
 
@@ -72,12 +73,10 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
                         OpenAIService.instance.verifyToken(String(tokenPasswordField.password))
                         verifyLabel.text = message("settings.verify.valid")
                         verifyLabel.icon = AllIcons.General.InspectionsOK
-                    }
-                    catch (e: OpenAIAPIException) {
+                    } catch (e: OpenAIAPIException) {
                         verifyLabel.text = message("settings.verify.invalid", e.statusCode)
                         verifyLabel.icon = AllIcons.General.InspectionsError
-                    }
-                    catch (e: Exception) {
+                    } catch (e: Exception) {
                         verifyLabel.text = message("settings.verify.invalid", "Unknown")
                         verifyLabel.icon = AllIcons.General.InspectionsError
                     }
