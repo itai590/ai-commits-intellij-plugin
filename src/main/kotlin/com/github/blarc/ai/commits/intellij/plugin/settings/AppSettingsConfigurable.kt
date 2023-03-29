@@ -1,6 +1,7 @@
 package com.github.blarc.ai.commits.intellij.plugin.settings
 
 import com.github.blarc.ai.commits.intellij.plugin.AICommitsBundle.message
+import com.intellij.ide.starters.shared.withValidation
 import com.intellij.openapi.options.BoundConfigurable
 import com.intellij.ui.dsl.builder.*
 import java.awt.Component
@@ -25,11 +26,17 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
             comment(message("settings.openAITokenComment"))
         }
 
-        // List of Locales
+        // Prompt to use with OpenAI
         row {
-            comboBox(Locale.getAvailableLocales().toList(), AppSettingsListCellRenderer())
-                .label(message("settings.locale"))
-                .bindItem(AppSettings.instance::locale.toNullableProperty())
+            textField()
+                .label(message("settings.prompt"))
+                .bindText(
+                    { AppSettings.instance.getPrompt() },
+                    { AppSettings.instance.savePrompt(it) }
+                )
+                .align(Align.FILL)
         }
+
+
     }
 }

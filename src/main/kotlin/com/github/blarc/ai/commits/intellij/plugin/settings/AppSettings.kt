@@ -5,6 +5,7 @@ import com.github.blarc.ai.commits.intellij.plugin.notifications.sendNotificatio
 import com.intellij.credentialStore.CredentialAttributes
 import com.intellij.credentialStore.Credentials
 import com.intellij.ide.passwordSafe.PasswordSafe
+import com.intellij.ide.util.PropertiesComponent
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
@@ -21,7 +22,8 @@ class AppSettings : PersistentStateComponent<AppSettings> {
     private val openAITokenTitle = "OpenAIToken"
     private val openAIPromptTitle = "OpenAIPrompt"
 
-    var locale: Locale = Locale.getDefault()
+    private var defaultPrompt = "Write a commit message for the following changes: {diffs}"
+
     var requestSupport = true
 
     companion object {
@@ -60,5 +62,15 @@ class AppSettings : PersistentStateComponent<AppSettings> {
     override fun loadState(state: AppSettings) {
         XmlSerializerUtil.copyBean(state, this)
     }
+
+    fun getPrompt(): String {
+        return PropertiesComponent.getInstance().getValue(openAIPromptTitle, defaultPrompt)
+    }
+
+    fun savePrompt(it: String) {
+        if (!it.contains("{diffs}")) return
+        PropertiesComponent.getInstance().setValue(openAIPromptTitle, it)
+    }
+
 
 }
