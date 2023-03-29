@@ -1,5 +1,7 @@
 package com.github.blarc.ai.commits.intellij.plugin.settings
 
+import com.github.blarc.ai.commits.intellij.plugin.notifications.Notification
+import com.github.blarc.ai.commits.intellij.plugin.notifications.sendNotification
 import com.intellij.credentialStore.CredentialAttributes
 import com.intellij.credentialStore.Credentials
 import com.intellij.ide.passwordSafe.PasswordSafe
@@ -17,8 +19,11 @@ import java.util.Locale
 class AppSettings : PersistentStateComponent<AppSettings> {
 
     private val openAITokenTitle = "OpenAIToken"
+    private val openAIPromptTitle = "OpenAIPrompt"
+
     var locale: Locale = Locale.getDefault()
     var requestSupport = true
+
     companion object {
         const val SERVICE_NAME = "com.github.blarc.ai.commits.intellij.plugin.settings.AppSettings"
 
@@ -27,7 +32,12 @@ class AppSettings : PersistentStateComponent<AppSettings> {
     }
 
     fun saveOpenAIToken(token: String) {
-        PasswordSafe.instance.setPassword(getCredentialAttributes(openAITokenTitle), token)
+        println("Saving token: $token")
+        try {
+            PasswordSafe.instance.setPassword(getCredentialAttributes(openAITokenTitle), token)
+        } catch (e: Exception) {
+            sendNotification(Notification.unableToSaveToken())
+        }
     }
 
     fun getOpenAIToken(): String? {

@@ -10,19 +10,22 @@ import javax.swing.JList
 
 class AppSettingsConfigurable : BoundConfigurable(message("settings.general.group.title")) {
     override fun createPanel() = panel {
-
+        // OpenAI Token
         row {
             passwordField()
                 .label(message("settings.openAIToken"))
                 .bindText(
                     { AppSettings.instance.getOpenAIToken().orEmpty() },
-                    { AppSettings.instance.saveOpenAIToken(it)}
+                    { AppSettings.instance.saveOpenAIToken(it) }
                 )
                 .align(Align.FILL)
         }
+        // Get OpenAI Token
         row {
             comment(message("settings.openAITokenComment"))
         }
+
+        // List of Locales
         row {
             comboBox(Locale.getAvailableLocales().toList(), AppSettingsListCellRenderer())
                 .label(message("settings.locale"))

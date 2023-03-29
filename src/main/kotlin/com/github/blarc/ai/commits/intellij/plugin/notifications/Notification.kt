@@ -39,9 +39,13 @@ data class Notification(
             )
         )
 
+        fun noCommitMessageField() = Notification(DEFAULT_TITLE, message = message("notifications.no-field"))
+
         fun emptyDiff() = Notification(DEFAULT_TITLE, message = message("notifications.empty-diff"))
+
         fun unsuccessfulRequest(message: String) = Notification(message = message("notifications.unsuccessful-request", message))
 
+        fun unableToSaveToken() = Notification(message = message("notifications.unable-to-save-token"))
     }
 
     fun isTransient() = type == Type.TRANSIENT

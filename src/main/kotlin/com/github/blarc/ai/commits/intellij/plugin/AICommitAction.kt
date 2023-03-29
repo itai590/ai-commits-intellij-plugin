@@ -28,7 +28,7 @@ class AICommitAction : AnAction(), DumbAware {
         val commitWorkflowHandler =
             e.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as AbstractCommitWorkflowHandler<*, *>
         val includedChanges = commitWorkflowHandler.ui.getIncludedChanges()
-        val commitMessage = VcsDataKeys.COMMIT_MESSAGE_CONTROL.getData(e.dataContext)
+        val commitMessageField = VcsDataKeys.COMMIT_MESSAGE_CONTROL.getData(e.dataContext)
 
         runBackgroundableTask(message("action.background"), project) {
             val diff = computeDiff(includedChanges, project)
@@ -38,10 +38,21 @@ class AICommitAction : AnAction(), DumbAware {
                 return@runBackgroundableTask
             }
 
+            if (commitMessageField == null) {
+                sendNotification(Notification.noCommitMessageField())
+                return@runBackgroundableTask
+            }
+
             val openAIService = OpenAIService.instance
             GlobalScope.launch(Dispatchers.Main) {
-                val generatedCommitMessage = openAIService.generateCommitMessage(diff, 1)
-                commitMessage?.setCommitMessage(generatedCommitMessage)
+                commitMessageField.setCommitMessage("Generating commit message...")
+                try {
+                    val generatedCommitMessage = openAIService.generateCommitMessage(diff, 1)
+                    commitMessageField.setCommitMessage(generatedCommitMessage)
+                } catch (e: Exception) {
+                    commitMessageField.setCommitMessage("Error generating commit message")
+                    sendNotification(Notification.unsuccessfulRequest(e.message ?: "Unknown error"))
+                }
             }
         }
     }
