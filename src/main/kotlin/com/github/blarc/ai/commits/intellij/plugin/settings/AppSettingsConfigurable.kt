@@ -4,7 +4,6 @@ import com.aallam.openai.api.exception.OpenAIAPIException
 import com.github.blarc.ai.commits.intellij.plugin.AICommitsBundle.message
 import com.github.blarc.ai.commits.intellij.plugin.OpenAIService
 import com.intellij.icons.AllIcons
-import com.intellij.ide.starters.shared.withValidation
 import com.intellij.openapi.options.BoundConfigurable
 import com.intellij.openapi.progress.runBackgroundableTask
 import com.intellij.ui.components.JBLabel
@@ -46,7 +45,7 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
 
         // Prompt to use with OpenAI
         row {
-            textField()
+            val promptTextArea = textArea()
                 .label(message("settings.prompt"))
                 .bindText(
                     { AppSettings.instance.getPrompt() },
@@ -54,7 +53,21 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
                 )
                 .align(Align.FILL)
                 .resizableColumn()
+
+            promptTextArea.component.wrapStyleWord = true
+            promptTextArea.component.lineWrap = true
+
+            promptTextArea.component.addCaretListener {
+                val fontMetrics = promptTextArea.component.getFontMetrics(promptTextArea.component.font)
+                val lineHeight = fontMetrics.height
+                val contentWidth = promptTextArea.component.size.width - promptTextArea.component.insets.left - promptTextArea.component.insets.right
+                val maxLineWidth = promptTextArea.component.ui.getPreferredSize(promptTextArea.component).width
+                val contentHeight = promptTextArea.component.preferredSize.height
+                val rows = ((contentHeight / lineHeight).coerceAtLeast(1) * maxLineWidth / contentWidth).coerceAtLeast(1)
+                promptTextArea.rows(rows)
+            }
         }
+
     }
 
     @OptIn(DelicateCoroutinesApi::class)
