@@ -46,6 +46,10 @@ data class Notification(
         fun unsuccessfulRequest(message: String) = Notification(message = message("notifications.unsuccessful-request", message))
 
         fun unableToSaveToken() = Notification(message = message("notifications.unable-to-save-token"))
+
+        fun usedPrompt(diff: String) = Notification (
+            message = message("notifications.uses-prompt", diff)
+        )
     }
 
     fun isTransient() = type == Type.TRANSIENT

@@ -12,6 +12,7 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vcs.VcsDataKeys
 import com.intellij.openapi.vcs.changes.Change
+import com.intellij.openapi.vcs.ui.CommitMessage
 import com.intellij.vcs.commit.AbstractCommitWorkflowHandler
 import git4idea.repo.GitRepositoryManager
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -33,6 +34,16 @@ class AICommitAction : AnAction(), DumbAware {
         runBackgroundableTask(message("action.background"), project) {
             val diff = computeDiff(includedChanges, project)
 
+            val hintMessageField = VcsDataKeys.COMMIT_MESSAGE_CONTROL.getData(e.dataContext) as CommitMessage
+            val currentCommitMessage = hintMessageField.text
+
+            // if currentCommitMessage starts with : then it is a hint
+            val hint = if (currentCommitMessage.startsWith("!")) {
+                currentCommitMessage.substring(1)
+            } else {
+                null
+            }
+
             if (diff.isBlank()) {
                 sendNotification(Notification.emptyDiff())
                 return@runBackgroundableTask
@@ -47,7 +58,7 @@ class AICommitAction : AnAction(), DumbAware {
             GlobalScope.launch(Dispatchers.Main) {
                 commitMessageField.setCommitMessage("Generating commit message...")
                 try {
-                    val generatedCommitMessage = openAIService.generateCommitMessage(diff, 1)
+                    val generatedCommitMessage = openAIService.generateCommitMessage(diff, hint, 1)
                     commitMessageField.setCommitMessage(generatedCommitMessage)
                 } catch (e: Exception) {
                     commitMessageField.setCommitMessage("Error generating commit message")
