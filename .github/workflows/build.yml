@@ -110,17 +110,6 @@ jobs:
           name: ${{ steps.artifact.outputs.filename }}
           path: ./build/distributions/content/*/*
 
-      # Commit the artifact to the repository on a separate branch
-      - name: Commit artifact
-        if: github.event_name == 'push'
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b artifact
-          git add .
-          git commit -m "Add artifact"
-          git push origin artifact
-
   # Prepare a draft release for GitHub Releases page for the manual verification
   # If accepted and published, release workflow would be triggered
   releaseDraft:
