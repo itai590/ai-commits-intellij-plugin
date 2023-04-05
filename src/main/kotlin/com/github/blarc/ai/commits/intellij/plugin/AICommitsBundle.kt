@@ -32,10 +32,10 @@ object AICommitsBundle : DynamicBundle(BUNDLE) {
     }
 
     fun openRepository() {
-        BrowserLauncher.instance.open("https://github.com/Blarc/ai-commits-intellij-plugin");
+        BrowserLauncher.instance.open("https://github.com/Marc-R2/ai-commits-intellij-plugin");
     }
 
-    fun plugin() = PluginManagerCore.getPlugin(PluginId.getId("com.github.blarc.ai-commits-intellij-plugin"))
+    fun plugin() = PluginManagerCore.getPlugin(PluginId.getId("com.github.marc-r2.commit_gpt-intellij-plugin"))
 
 
 }
