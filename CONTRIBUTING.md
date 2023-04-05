@@ -1,16 +1,15 @@
 # Contributing
 
-Contributions are **welcome**.
+Contributions and Issues are **welcome**.
 
 ## Pull Requests
 
-[//]: # (- **Add tests!** - Your patch won't be accepted if it doesn't have tests.)
+- Fork the repository and make changes on your fork in a new feature branch.
 
-- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
+- Make sure your fork is up-to-date with the latest changes from this repository.
 
-- **Create feature branches** - Don't ask us to pull from your master branch.
+- Once you're satisfied with your feature, send a pull request with some details about what you've done.
 
-- **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
+- Thanks for your contribution!
 
-- **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make 
-multiple intermediate commits while developing, please [squash them] before submitting.
+We recommend to use this Plugin to generate the commit message for your contribution.
