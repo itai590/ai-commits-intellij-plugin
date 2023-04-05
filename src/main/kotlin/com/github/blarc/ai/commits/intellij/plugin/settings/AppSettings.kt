@@ -10,8 +10,10 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
+import com.intellij.util.xmlb.Converter
 import com.intellij.util.xmlb.XmlSerializerUtil
-import java.util.Locale
+import com.intellij.util.xmlb.annotations.OptionTag
+import java.util.*
 
 @State(
     name = AppSettings.SERVICE_NAME,
@@ -21,6 +23,8 @@ class AppSettings : PersistentStateComponent<AppSettings> {
 
     private val openAITokenTitle = "OpenAIToken"
     private val openAIPromptTitle = "OpenAIPrompt"
+
+    private var hits = 0
 
     private var defaultPrompt = "Write a git commit message. " +
             "Use the conventional commit convention and follow best practices to maintain clear and concise commit messages. " +
@@ -40,7 +44,6 @@ class AppSettings : PersistentStateComponent<AppSettings> {
     }
 
     fun saveOpenAIToken(token: String) {
-        println("Saving token: $token")
         try {
             PasswordSafe.instance.setPassword(getCredentialAttributes(openAITokenTitle), token)
         } catch (e: Exception) {
@@ -79,4 +82,11 @@ class AppSettings : PersistentStateComponent<AppSettings> {
     }
 
 
+    fun recordHit() {
+        hits++
+        return
+        if (requestSupport && (hits == 50 || hits % 100 == 0)) {
+            sendNotification(Notification.star())
+        }
+    }
 }

@@ -23,11 +23,11 @@ data class Notification(
     companion object {
         private val DEFAULT_TITLE = message("notifications.title")
 
-        fun welcome(version: String) = Notification(message = message("notifications.welcome", version))
+        fun welcome(version: String) = Notification(message = message("notifications.welcome", version), type = Type.TRANSIENT)
 
         fun star() = Notification(
             message = """
-                Finding Gitlab Template Lint useful? Show your support 💖 and ⭐ the repository 🙏.
+                Finding Commit-GPT useful? Show your support 💖 and ⭐ the repository 🙏.
             """.trimIndent(),
             actions = setOf(
                 NotificationAction.openRepository() {
@@ -43,7 +43,13 @@ data class Notification(
 
         fun emptyDiff() = Notification(DEFAULT_TITLE, message = message("notifications.empty-diff"))
 
-        fun unsuccessfulRequest(message: String) = Notification(message = message("notifications.unsuccessful-request", message))
+        fun promptTooLarge() = Notification(DEFAULT_TITLE, message = message("notifications.prompt-too-large"))
+
+        fun unsuccessfulRequest(message: String) = Notification(
+            message = message("notifications.unsuccessful-request", message)
+        )
+
+        fun noCommitMessage(): Notification = Notification(message = message("notifications.no-commit-message"))
 
         fun unableToSaveToken() = Notification(message = message("notifications.unable-to-save-token"))
 
