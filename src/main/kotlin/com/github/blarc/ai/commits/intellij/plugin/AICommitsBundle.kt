@@ -15,7 +15,7 @@ private const val BUNDLE = "messages.MyBundle"
 
 object AICommitsBundle : DynamicBundle(BUNDLE) {
 
-    public val URL_BUG_REPORT = URL("https://github.com/Blarc/ai-commits-intellij-plugin/issues")
+    public val URL_BUG_REPORT = URL("https://github.com/Marc-R2/ai-commits-intellij-plugin/issues")
 
     @Suppress("SpreadOperator")
     @JvmStatic

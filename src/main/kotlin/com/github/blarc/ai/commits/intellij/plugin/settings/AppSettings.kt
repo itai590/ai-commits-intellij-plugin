@@ -17,7 +17,7 @@ import java.util.*
 
 @State(
     name = AppSettings.SERVICE_NAME,
-    storages = [Storage("AICommit.xml")]
+    storages = [Storage("CommitGPT.xml")]
 )
 class AppSettings : PersistentStateComponent<AppSettings> {
 
