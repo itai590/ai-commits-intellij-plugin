@@ -8,17 +8,19 @@
     <name>CommitGPT</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="" url="https://github.com/Blarc">Blarc</vendor>
+    <vendor email="" url="https://github.com/Marc-R2">Marc-R2</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <p>CommitGPT is a plugin that generates your commit messages with AI.</p>
+        <p>CommitGPT is a plugin that generates a commit messages based on you changes with ChatGPT.</p>
         <h3>Features</h3>
         <ul>
             <li>Generate commit message from diff using OpenAI API</li>
             <li>Compute diff only from the selected files and lines in the commit dialog</li>
+            <li>Customize the AI prompt</li>
+            <li>Give the AI a hint for the commit message (optional)</li>
         </ul>
         <h3>Usage</h3>
         <p>To get started, install the plugin and set OpenAI private token in plugin's settings:
@@ -26,7 +28,13 @@
         Settings > Tools > CommitGPT</p>
         <h3>Troubleshooting</h3>
         <p>We'd love to hear from you if you have any issues or feature requests. Please report them
-        <a href="https://github.com/Blarc/ai-commits-intellij-plugin/issues">here</a>.</p>
+        <a href="https://github.com/Marc-R2/ai-commits-intellij-plugin/issues">over on GitHub</a>.</p>
+
+        <h3>Hints for the AI</h3>
+        <p>
+            Just use the commit message field in the commit dialog to give the AI a hint for the commit message by
+            adding a '!' as the first character of the hint. "!<your breve description>". This is optional.
+        </p>
     ]]></description>
 
     <!-- Product and plugin compatibility requirements.
@@ -72,7 +80,7 @@
         <action
                 id="AICommit.Button"
                 text="CommitGPT"
-                description="Create commit message with AI"
+                description="Create commit message with ChatGPT AI"
                 icon="/icons/commit_gpt.svg"
                 class="com.github.blarc.ai.commits.intellij.plugin.AICommitAction">
 
