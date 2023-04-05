@@ -10,6 +10,9 @@ import com.github.blarc.ai.commits.intellij.plugin.settings.AppSettings
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.Service
 
+import com.knuddels.jtokkit.Encodings
+import com.knuddels.jtokkit.api.EncodingType
+
 @Service
 class OpenAIService {
     companion object {
@@ -26,6 +29,11 @@ class OpenAIService {
 
         val prompt = AppSettings.instance.getPrompt().replace("{diffs}", diff)
             .replace("{hint}", hint ?: "No hint provided")
+
+        if (isPromptTooLarge(prompt)) {
+            sendNotification(Notification.promptTooLarge())
+            return "Prompt is too large"
+        }
 
         sendNotification(Notification.usedPrompt(prompt))
 
@@ -51,5 +59,11 @@ class OpenAIService {
     @Throws(Exception::class)
     suspend fun verifyToken(token: String){
         OpenAI(token).models()
+    }
+
+    private fun isPromptTooLarge(prompt: String): Boolean {
+        val registry = Encodings.newDefaultEncodingRegistry()
+        val encoding = registry.getEncoding(EncodingType.CL100K_BASE)
+        return encoding.countTokens(prompt) > 4000
     }
 }
