@@ -1,7 +1,7 @@
 
 
 <div align="center">
-    <img src="./src/main/resources/icons/aiCommits15.svg" width="200" height="200" alt="logo"/>
+    <img src="./src/main/resources/META-INF/pluginIcon.svg" width="200" height="200" alt="logo"/>
 </div>
 <h1 align="center">CommitGPT</h1>
 <p align="center">CommitGPT for IntelliJ based IDEs/Android Studio.</p>

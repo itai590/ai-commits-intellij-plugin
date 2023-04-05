@@ -73,7 +73,7 @@
                 id="AICommit.Button"
                 text="CommitGPT"
                 description="Create commit message with AI"
-                icon="/icons/aiCommits15.svg"
+                icon="/icons/commit_gpt.svg"
                 class="com.github.blarc.ai.commits.intellij.plugin.AICommitAction">
 
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="last"/>
