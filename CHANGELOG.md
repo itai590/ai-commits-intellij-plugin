@@ -1,6 +1,17 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Different prompts to choose from.
+- Bug report link to settings.
+
+### Changed
+- Sort locales alphabetically.
+
+## [0.5.1] - 2023-04-05
+
+### Fixed
+- Use prompt instead of diff when making request to Open AI API.
 
 ## [0.5.0] - 2023-04-04
 
@@ -38,7 +49,8 @@
 - Settings for locale and OpenAI token.
 - Create commit message only for selected files.
 
-[Unreleased]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.2.0...v0.3.0

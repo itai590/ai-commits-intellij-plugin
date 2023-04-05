@@ -1,12 +1,14 @@
 package com.github.blarc.ai.commits.intellij.plugin.settings
 
 import com.aallam.openai.api.exception.OpenAIAPIException
+import com.github.blarc.ai.commits.intellij.plugin.AICommitsBundle
 import com.github.blarc.ai.commits.intellij.plugin.AICommitsBundle.message
 import com.github.blarc.ai.commits.intellij.plugin.OpenAIService
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.options.BoundConfigurable
 import com.intellij.openapi.progress.runBackgroundableTask
 import com.intellij.ui.components.JBLabel
+import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.dsl.builder.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +21,14 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
 
     private val tokenPasswordField = JPasswordField()
     private val verifyLabel = JBLabel()
+
+    private val promptTextArea = JBTextArea()
+    init {
+        promptTextArea.wrapStyleWord = true
+        promptTextArea.lineWrap = true
+        promptTextArea.isEditable = false
+    }
+
     override fun createPanel() = panel {
         // OpenAI Token
         row {
@@ -67,7 +77,24 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
                 promptTextArea.rows(rows)
             }
         }
-
+        row {
+            comboBox(AppSettings.instance.prompts.keys.toList(), AppSettingsListCellRenderer())
+                .label(message("settings.prompt"))
+                .bindItem(AppSettings.instance::currentPrompt.toNullableProperty())
+                .onChanged { promptTextArea.text = AppSettings.instance.prompts[it.item] }
+        }
+        row {
+            cell(promptTextArea)
+                .bindText(
+                    { AppSettings.instance.getPrompt("") },
+                    {  }
+                )
+                .align(Align.FILL)
+                .resizableColumn()
+        }.resizableRow()
+        row {
+            browserLink(message("settings.report-bug"), AICommitsBundle.URL_BUG_REPORT.toString())
+        }
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -82,7 +109,6 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
 
                 GlobalScope.launch(Dispatchers.IO) {
                     try {
-                        println(String(tokenPasswordField.password))
                         OpenAIService.instance.verifyToken(String(tokenPasswordField.password))
                         verifyLabel.text = message("settings.verify.valid")
                         verifyLabel.icon = AllIcons.General.InspectionsOK

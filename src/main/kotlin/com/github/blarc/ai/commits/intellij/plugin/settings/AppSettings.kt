@@ -6,6 +6,7 @@ import com.intellij.credentialStore.CredentialAttributes
 import com.intellij.credentialStore.Credentials
 import com.intellij.ide.passwordSafe.PasswordSafe
 import com.intellij.ide.util.PropertiesComponent
+import com.intellij.ide.util.PropertiesComponent
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
@@ -21,8 +22,6 @@ import java.util.*
 )
 class AppSettings : PersistentStateComponent<AppSettings> {
 
-    var lastVersion: String? = null
-
     private val openAITokenTitle = "OpenAIToken"
     private val openAIPromptTitle = "OpenAIPrompt"
 
@@ -37,12 +36,21 @@ class AppSettings : PersistentStateComponent<AppSettings> {
             "Remember, do not preface the commit with anything and add a short description of why the commit was done after the commit message."
 
     var requestSupport = true
+    var lastVersion: String? = null
 
     companion object {
         const val SERVICE_NAME = "com.github.blarc.ai.commits.intellij.plugin.settings.AppSettings"
-
         val instance: AppSettings
             get() = ApplicationManager.getApplication().getService(AppSettings::class.java)
+    }
+
+    fun getPrompt(): String {
+        return PropertiesComponent.getInstance().getValue(openAIPromptTitle, defaultPrompt)
+    }
+
+    fun savePrompt(it: String) {
+        if (!it.contains("{diffs}")) return
+        PropertiesComponent.getInstance().setValue(openAIPromptTitle, it)
     }
 
     fun saveOpenAIToken(token: String) {
@@ -73,16 +81,6 @@ class AppSettings : PersistentStateComponent<AppSettings> {
     override fun loadState(state: AppSettings) {
         XmlSerializerUtil.copyBean(state, this)
     }
-
-    fun getPrompt(): String {
-        return PropertiesComponent.getInstance().getValue(openAIPromptTitle, defaultPrompt)
-    }
-
-    fun savePrompt(it: String) {
-        if (!it.contains("{diffs}")) return
-        PropertiesComponent.getInstance().setValue(openAIPromptTitle, it)
-    }
-
 
     fun recordHit() {
         hits++
