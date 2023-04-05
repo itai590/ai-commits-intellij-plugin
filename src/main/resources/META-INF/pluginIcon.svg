@@ -12,7 +12,7 @@
                          values="rgb(100%,0%,0%);rgb(100%,0%,0%);rgb(100%,0%,0%);rgb(100%,0%,0%);rgb(0%,100%,0%)"
                          dur="4s" repeatCount="indefinite"/>
             </stop>
-            <stop offset="1" stop-color="rgb(0%,100%,0%)">
+            <stop offset="0.01" stop-color="rgb(0%,100%,0%)">
                 <animate attributeName="stop-color"
                          values="rgb(0%,100%,0%);rgb(0%,100%,0%);rgb(100%,0%,0%);rgb(0%,100%,0%);rgb(0%,100%,0%)"
                          dur="4s" repeatCount="indefinite"/>

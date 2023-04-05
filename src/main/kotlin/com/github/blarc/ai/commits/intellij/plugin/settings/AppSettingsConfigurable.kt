@@ -23,6 +23,7 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
     private val verifyLabel = JBLabel()
 
     private val promptTextArea = JBTextArea()
+
     init {
         promptTextArea.wrapStyleWord = true
         promptTextArea.lineWrap = true
@@ -70,28 +71,38 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
             promptTextArea.component.addCaretListener {
                 val fontMetrics = promptTextArea.component.getFontMetrics(promptTextArea.component.font)
                 val lineHeight = fontMetrics.height
-                val contentWidth = promptTextArea.component.size.width - promptTextArea.component.insets.left - promptTextArea.component.insets.right
+                val contentWidth =
+                    promptTextArea.component.size.width - promptTextArea.component.insets.left - promptTextArea.component.insets.right
                 val maxLineWidth = promptTextArea.component.ui.getPreferredSize(promptTextArea.component).width
                 val contentHeight = promptTextArea.component.preferredSize.height
-                val rows = ((contentHeight / lineHeight).coerceAtLeast(1) * maxLineWidth / contentWidth).coerceAtLeast(1)
+                val rows =
+                    ((contentHeight / lineHeight).coerceAtLeast(1) * maxLineWidth / contentWidth).coerceAtLeast(1)
                 promptTextArea.rows(rows)
             }
         }
+        /*
         row {
             comboBox(AppSettings.instance.prompts.keys.toList(), AppSettingsListCellRenderer())
                 .label(message("settings.prompt"))
                 .bindItem(AppSettings.instance::currentPrompt.toNullableProperty())
                 .onChanged { promptTextArea.text = AppSettings.instance.prompts[it.item] }
         }
+        */
+
+        // Prompt to use with OpenAI
+        /*
         row {
             cell(promptTextArea)
                 .bindText(
-                    { AppSettings.instance.getPrompt("") },
-                    {  }
+                    { AppSettings.instance.getPrompt() },
+                    { AppSettings.instance.savePrompt(it) }
                 )
                 .align(Align.FILL)
                 .resizableColumn()
         }.resizableRow()
+        */
+
+        // Report Bug
         row {
             browserLink(message("settings.report-bug"), AICommitsBundle.URL_BUG_REPORT.toString())
         }

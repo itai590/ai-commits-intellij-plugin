@@ -12,7 +12,7 @@
                          values="rgb(100%,0%,0%);rgb(100%,0%,0%);rgb(100%,0%,0%);rgb(100%,0%,0%);rgb(0%,100%,0%)"
                          dur="4s" repeatCount="indefinite"/>
             </stop>
-            <stop offset="1" stop-color="rgb(0%,100%,0%)">
+            <stop offset="0.01" stop-color="rgb(0%,100%,0%)">
                 <animate attributeName="stop-color"
                          values="rgb(0%,100%,0%);rgb(0%,100%,0%);rgb(100%,0%,0%);rgb(0%,100%,0%);rgb(0%,100%,0%)"
                          dur="4s" repeatCount="indefinite"/>
@@ -22,10 +22,10 @@
 
         <style>
             stop:nth-child(1) {
-            animation: colorChange 3s ease-in-out infinite;
+            animation: colorChange 4s ease-in-out infinite;
             }
             stop:nth-child(2) {
-            animation: colorChange 3s ease-in-out infinite;
+            animation: colorChange 4s ease-in-out infinite;
             }
         </style>
 
