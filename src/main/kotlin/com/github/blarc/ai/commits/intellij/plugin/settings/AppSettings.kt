@@ -21,6 +21,8 @@ import java.util.*
 )
 class AppSettings : PersistentStateComponent<AppSettings> {
 
+    var lastVersion: String? = null
+
     private val openAITokenTitle = "OpenAIToken"
     private val openAIPromptTitle = "OpenAIPrompt"
 
@@ -85,8 +87,8 @@ class AppSettings : PersistentStateComponent<AppSettings> {
     fun recordHit() {
         hits++
         return
-        if (requestSupport && (hits == 50 || hits % 100 == 0)) {
+        /* if (requestSupport && (hits == 50 || hits % 100 == 0)) {
             sendNotification(Notification.star())
-        }
+        } */
     }
 }

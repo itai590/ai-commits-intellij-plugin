@@ -13,7 +13,7 @@ data class Notification(
     val title: String? = null,
     val message: String,
     val actions: Set<NotificationAction> = setOf(),
-    val type: Type = Type.PERSISTENT
+    val type: Type = Type.TRANSIENT
 ) {
     enum class Type {
         PERSISTENT,
@@ -27,7 +27,7 @@ data class Notification(
 
         fun star() = Notification(
             message = """
-                Finding Commit-GPT useful? Show your support 💖 and ⭐ the repository 🙏.
+                Finding CommitGPT useful? Show your support 💖 and ⭐ the repository 🙏.
             """.trimIndent(),
             actions = setOf(
                 NotificationAction.openRepository() {

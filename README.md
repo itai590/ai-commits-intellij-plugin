@@ -5,8 +5,8 @@
         <img src="./src/main/resources/META-INF/pluginIcon.svg" width="200" height="200" alt="logo"/>
     </a>
 </div>
-<h1 align="center">AI Commits</h1>
-<p align="center">AI Commits for IntelliJ based IDEs/Android Studio.</p>
+<h1 align="center">CommitGPT</h1>
+<p align="center">CommitGPT for IntelliJ based IDEs/Android Studio.</p>
 
 <p align="center">
 <a href="https://actions-badge.atrox.dev/blarc/ai-commits-intellij-plugin/goto?ref=main"><img alt="Build Status" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fblarc%2Fai-commits-intellij-plugin%2Fbadge%3Fref%3Dmain&style=popout-square" /></a>
@@ -25,12 +25,12 @@
 [//]: # (- [Demo]&#40;#demo&#41;)
 
 ## Description
-AI Commits is a plugin that generates your commit messages with AI. To get started, 
+CommitGPT is a plugin that generates your commit messages with ChatGPT. To get started, 
 install the plugin and set OpenAI private token in plugin's settings:
-<kbd>Settings</kbd> > <kbd>Tools</kbd> > <kbd>AI Commits</kbd>
+<kbd>Settings</kbd> > <kbd>Tools</kbd> > <kbd>CommitGPT</kbd>
 
 ## Features
-- Generate commit message from diff using OpenAI API
+- Generate commit message from diff using OpenAI ChatGPT API
 - Compute diff only from the selected files and lines in the commit dialog
 
 ## Compatibility
@@ -44,15 +44,15 @@ IntelliJ IDEA, PhpStorm, WebStorm, PyCharm, RubyMine, AppCode, CLion, GoLand, Da
 
 Or you could install it inside your IDE:
 
-For Windows & Linux: <kbd>File</kbd> > <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "AI Commits"</kbd> > <kbd>Install Plugin</kbd> > <kbd>Restart IntelliJ IDEA</kbd>
+For Windows & Linux: <kbd>File</kbd> > <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "CommitGPT"</kbd> > <kbd>Install Plugin</kbd> > <kbd>Restart IntelliJ IDEA</kbd>
 
-For Mac: <kbd>IntelliJ IDEA</kbd> > <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "AI Commits"</kbd> > <kbd>Install Plugin</kbd>  > <kbd>Restart IntelliJ IDEA</kbd>
+For Mac: <kbd>IntelliJ IDEA</kbd> > <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "CommitGPT"</kbd> > <kbd>Install Plugin</kbd>  > <kbd>Restart IntelliJ IDEA</kbd>
 
 
 ### Installation from zip
-1. Download zip from [releases](https://github.com/Blarc/gitlab-lint-plugin/releases)
+1. Download zip from [releases](https://github.com/Marc-R2/ai-commits-intellij-plugin/releases)
 2. Import to IntelliJ: <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Cog</kbd> > <kbd>Install plugin from disk...</kbd>
-3. Set OpenAI private token in plugin's settings: <kbd>Settings</kbd> > <kbd>Tools</kbd> > <kbd>AI Commits</kbd>
+3. Set OpenAI private token in plugin's settings: <kbd>Settings</kbd> > <kbd>Tools</kbd> > <kbd>CommitGPT</kbd>
 
 [//]: # (## Demo)
 
@@ -77,6 +77,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Acknowledgements
 
 - Inspired by Nutlope's [AICommits](https://github.com/Nutlope/aicommits).
+- Fork from Blarc's [AI Commits](https://github.com/Blarc/ai-commits-intellij-plugin)
 - [openai-kotlin](https://github.com/aallam/openai-kotlin) for OpenAI API client.
 
 ## License

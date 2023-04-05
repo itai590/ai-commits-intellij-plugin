@@ -17,9 +17,7 @@ class ApplicationStartupListener : ProjectActivity {
         val settings = AppSettings.instance
         val version = AICommitsBundle.plugin()?.version
 
-        if (version == settings.lastVersion) {
-            return
-        }
+        if (version == settings.lastVersion) return
 
         settings.lastVersion = version
         if (firstTime && version != null) {
