@@ -39,11 +39,11 @@ class PromptTable {
     }
 
     private fun createTableModel(): ListTableModel<Prompt> = ListTableModel(
-            arrayOf(
-                    createColumn<Prompt>(message("settings.prompt.name")) { prompt -> prompt.name },
-                    createColumn(message("settings.prompt.description")) { prompt -> prompt.description },
-            ),
-            prompts.values.toList()
+        arrayOf(
+            createColumn<Prompt>(message("settings.prompt.name")) { prompt -> prompt.name },
+            createColumn(message("settings.prompt.description")) { prompt -> prompt.description },
+        ),
+        prompts.values.toList()
     )
 
     fun addPrompt(): Prompt? {
@@ -120,27 +120,27 @@ class PromptTable {
         override fun createCenterPanel() = panel {
             row(message("settings.prompt.name")) {
                 cell(promptNameTextField)
-                        .align(Align.FILL)
-                        .bindText(prompt::name)
-                        .applyIf(prompt.canBeChanged) { focused() }
-                        .validationOnApply { notBlank(it.text) }
-                        .applyIf(newPrompt == null) { validationOnApply { unique(it.text.lowercase(), prompts) } }
+                    .align(Align.FILL)
+                    .bindText(prompt::name)
+                    .applyIf(prompt.canBeChanged) { focused() }
+                    .validationOnApply { notBlank(it.text) }
+                    .applyIf(newPrompt == null) { validationOnApply { unique(it.text.lowercase(), prompts) } }
             }
             row(message("settings.prompt.description")) {
                 cell(promptDescriptionTextField)
-                        .align(Align.FILL)
-                        .bindText(prompt::description)
-                        .validationOnApply { notBlank(it.text) }
+                    .align(Align.FILL)
+                    .bindText(prompt::description)
+                    .validationOnApply { notBlank(it.text) }
             }
             row {
                 label(message("settings.prompt.content"))
             }
             row() {
                 cell(promptContentTextArea)
-                        .align(Align.FILL)
-                        .bindText(prompt::content)
-                        .validationOnApply { notBlank(it.text) }
-                        .resizableColumn()
+                    .align(Align.FILL)
+                    .bindText(prompt::content)
+                    .validationOnApply { notBlank(it.text) }
+                    .resizableColumn()
             }.resizableRow()
             row {
                 comment(message("settings.prompt.comment"))

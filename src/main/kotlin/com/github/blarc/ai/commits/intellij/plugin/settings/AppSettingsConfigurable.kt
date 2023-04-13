@@ -40,78 +40,32 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
         group(JBLabel("OpenAI")) {
             row {
                 cell(tokenPasswordField)
-                        .label(message("settings.openAIToken"))
-                        .bindText(
-                                { AppSettings.instance.getOpenAIToken().orEmpty() },
-                                { AppSettings.instance.saveOpenAIToken(it) }
-                        )
-                        .align(Align.FILL)
-                        .resizableColumn()
-                        .focused()
+                    .label(message("settings.openAIToken"))
+                    .bindText(
+                        { AppSettings.instance.getOpenAIToken().orEmpty() },
+                        { AppSettings.instance.saveOpenAIToken(it) }
+                    )
+                    .align(Align.FILL)
+                    .resizableColumn()
+                    .focused()
                 button(message("settings.verifyToken")) {
                     verifyToken()
                 }.align(AlignX.RIGHT)
             }
             row {
                 comment(message("settings.openAITokenComment"))
-                        .align(AlignX.LEFT)
+                    .align(AlignX.LEFT)
                 cell(verifyLabel)
-                        .align(AlignX.RIGHT)
+                    .align(AlignX.RIGHT)
             }
             row {
                 textField()
-                        .label(message("settings.openAIProxy"))
-                        .bindText(AppSettings.instance::proxyUrl.toNonNullableProperty(""))
-                        .resizableColumn()
-                        .applyToComponent { minimumWidth = 300 }
+                    .label(message("settings.openAIProxy"))
+                    .bindText(AppSettings.instance::proxyUrl.toNonNullableProperty(""))
+                    .resizableColumn()
+                    .applyToComponent { minimumWidth = 300 }
             }
         }
-
-        // Prompt to use with OpenAI
-        row {
-            val promptTextArea = textArea()
-                .label(message("settings.prompt"))
-                .bindText(
-                    { AppSettings.instance.getPrompt() },
-                    { AppSettings.instance.savePrompt(it) }
-                )
-                .align(Align.FILL)
-                .resizableColumn()
-
-            promptTextArea.component.wrapStyleWord = true
-            promptTextArea.component.lineWrap = true
-
-            promptTextArea.component.addCaretListener {
-                val fontMetrics = promptTextArea.component.getFontMetrics(promptTextArea.component.font)
-                val lineHeight = fontMetrics.height
-                val contentWidth =
-                    promptTextArea.component.size.width - promptTextArea.component.insets.left - promptTextArea.component.insets.right
-                val maxLineWidth = promptTextArea.component.ui.getPreferredSize(promptTextArea.component).width
-                val contentHeight = promptTextArea.component.preferredSize.height
-                val rows =
-                    ((contentHeight / lineHeight).coerceAtLeast(1) * maxLineWidth / contentWidth).coerceAtLeast(1)
-                promptTextArea.rows(rows)
-            }
-        }
-        /*
-        row {
-            comboBox(AppSettings.instance.prompts.keys.toList(), AppSettingsListCellRenderer())
-                .label(message("settings.prompt"))
-                .bindItem(AppSettings.instance::currentPrompt.toNullableProperty())
-                .onChanged { promptTextArea.text = AppSettings.instance.prompts[it.item] }
-        }
-        */
-
-        // Prompt to use with OpenAI
-        /*
-        row {
-            cell(promptTextArea)
-                .bindText(
-                    { AppSettings.instance.getPrompt() },
-                    { AppSettings.instance.savePrompt(it) }
-                )
-                .align(Align.FILL)
-                .resizableColumn()
 
         group(JBLabel("Prompt")) {
             row {
@@ -121,42 +75,41 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
             }
             row {
                 promptComboBox = comboBox(AppSettings.instance.prompts.values, AppSettingsListCellRenderer())
-                        .label(message("settings.prompt"))
-                        .bindItem(AppSettings.instance::currentPrompt.toNullableProperty())
+                    .label(message("settings.prompt"))
+                    .bindItem(AppSettings.instance::currentPrompt.toNullableProperty())
             }
             row {
                 toolbarDecorator = ToolbarDecorator.createDecorator(promptTable.table)
-                        .setAddAction {
-                            promptTable.addPrompt().let {
-                                promptComboBox.component.addItem(it)
-                            }
+                    .setAddAction {
+                        promptTable.addPrompt().let {
+                            promptComboBox.component.addItem(it)
                         }
-                        .setEditAction {
-                            promptTable.editPrompt()?.let {
-                                promptComboBox.component.removeItem(it.first)
-                                promptComboBox.component.addItem(it.second)
-                            }
+                    }
+                    .setEditAction {
+                        promptTable.editPrompt()?.let {
+                            promptComboBox.component.removeItem(it.first)
+                            promptComboBox.component.addItem(it.second)
                         }
-                        .setEditActionUpdater {
-                            updateActionAvailability(CommonActionsPanel.Buttons.EDIT)
-                            true
+                    }
+                    .setEditActionUpdater {
+                        updateActionAvailability(CommonActionsPanel.Buttons.EDIT)
+                        true
+                    }
+                    .setRemoveAction {
+                        promptTable.removePrompt()?.let {
+                            promptComboBox.component.removeItem(it)
                         }
-                        .setRemoveAction {
-                            promptTable.removePrompt()?.let {
-                                promptComboBox.component.removeItem(it)
-                            }
-                        }
-                        .setRemoveActionUpdater {
-                            updateActionAvailability(CommonActionsPanel.Buttons.REMOVE)
-                            true
-                        }
-                        .disableUpDownActions()
+                    }
+                    .setRemoveActionUpdater {
+                        updateActionAvailability(CommonActionsPanel.Buttons.REMOVE)
+                        true
+                    }
+                    .disableUpDownActions()
 
                 cell(toolbarDecorator.createPanel())
-                        .align(Align.FILL)
+                    .align(Align.FILL)
             }.resizableRow()
         }.resizableRow()
-        */
 
         // Report Bug
         row {

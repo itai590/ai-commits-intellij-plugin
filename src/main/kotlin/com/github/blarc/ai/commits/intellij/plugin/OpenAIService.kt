@@ -28,8 +28,7 @@ class OpenAIService {
 
         val openAI = OpenAI(openAiToken)
 
-        val prompt = AppSettings.instance.getPrompt().replace("{diffs}", diff)
-            .replace("{hint}", hint ?: "No hint provided")
+        val prompt = AppSettings.instance.getPrompt(diff, hint)
 
         if (isPromptTooLarge(prompt)) {
             sendNotification(Notification.promptTooLarge())

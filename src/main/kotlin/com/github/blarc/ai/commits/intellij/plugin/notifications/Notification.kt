@@ -50,7 +50,6 @@ data class Notification(
         )
 
         fun noCommitMessage(): Notification = Notification(message = message("notifications.no-commit-message"))
-        fun unableToSaveToken(): Notification = Notification(message = message("notifications.unable-to-save-token"))
 
         fun unableToSaveToken() = Notification(message = message("notifications.unable-to-save-token"))
 
