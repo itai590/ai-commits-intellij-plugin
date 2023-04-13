@@ -15,20 +15,24 @@ import com.intellij.openapi.vcs.VcsDataKeys
 import com.intellij.openapi.vcs.changes.Change
 import com.intellij.openapi.vcs.ui.CommitMessage
 import com.intellij.vcs.commit.AbstractCommitWorkflowHandler
+import com.knuddels.jtokkit.Encodings
+import com.knuddels.jtokkit.api.EncodingType
 import git4idea.repo.GitRepositoryManager
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.StringWriter
 
 class AICommitAction : AnAction(), DumbAware {
-    @OptIn(DelicateCoroutinesApi::class)
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return
 
-        val commitWorkflowHandler =
-            e.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as AbstractCommitWorkflowHandler<*, *>
+        val commitWorkflowHandler = e.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as AbstractCommitWorkflowHandler<*, *>?
+        if (commitWorkflowHandler == null) {
+            sendNotification(Notification.noCommitMessage())
+            return
+        }
+
         val includedChanges = commitWorkflowHandler.ui.getIncludedChanges()
         val commitMessageField = VcsDataKeys.COMMIT_MESSAGE_CONTROL.getData(e.dataContext)
 
@@ -56,7 +60,7 @@ class AICommitAction : AnAction(), DumbAware {
             }
 
             val openAIService = OpenAIService.instance
-            GlobalScope.launch(Dispatchers.Main) {
+            runBlocking(Dispatchers.Main) {
                 commitMessageField.setCommitMessage("Generating commit message...")
                 try {
                     val generatedCommitMessage = openAIService.generateCommitMessage(diff, hint, 1)

@@ -15,6 +15,7 @@ import com.knuddels.jtokkit.api.EncodingType
 
 @Service
 class OpenAIService {
+
     companion object {
         const val model = "gpt-3.5-turbo"
         val instance: OpenAIService

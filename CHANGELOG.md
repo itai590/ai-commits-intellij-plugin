@@ -1,12 +1,35 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.7.0] - 2023-04-12
+
 ### Added
+- Open AI proxy setting.
+
+## [0.6.2] - 2023-04-11
+
+### Fixed
+- Locale is not used in prompt.
+
+## [0.6.1] - 2023-04-10
+
+### Fixed
+- Commit workflow handler can be null.
+
+## [0.6.0] - 2023-04-08
+
+### Added
+- Table for setting prompts.
 - Different prompts to choose from.
 - Bug report link to settings.
+- Add generate commit action progress indicator.
 
 ### Changed
 - Sort locales alphabetically.
+
+### Fixed
+- Changing token does not work.
 
 ## [0.5.1] - 2023-04-05
 
@@ -49,7 +72,11 @@
 - Settings for locale and OpenAI token.
 - Create commit message only for selected files.
 
-[Unreleased]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.5.1...HEAD
+[Unreleased]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.6.2...v0.7.0
+[0.6.2]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.6.1...v0.6.2
+[0.6.1]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.6.0...v0.6.1
+[0.6.0]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/Blarc/ai-commits-intellij-plugin/compare/v0.3.0...v0.4.0

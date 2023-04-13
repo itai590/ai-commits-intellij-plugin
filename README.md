@@ -25,15 +25,14 @@
 [//]: # (- [Demo]&#40;#demo&#41;)
 
 ## Description
-
 CommitGPT is a plugin that generates your commit messages with ChatGPT. To get started,
 install the plugin and set OpenAI private token in plugin's settings:
 <kbd>Settings</kbd> > <kbd>Tools</kbd> > <kbd>CommitGPT</kbd>
 
 ## Features
-
 - Generate commit message from diff using OpenAI ChatGPT API
 - Compute diff only from the selected files and lines in the commit dialog
+- Create your own prompt for commit message generation
 - Choose your own base prompt
 - Include a hint in the prompt for the AI to generate a better commit message.
 
@@ -59,7 +58,6 @@ The prompt can also include `{hint}` to include a hint in the prompt for the AI 
 `{hint}` is optional.
 
 ## Compatibility
-
 IntelliJ IDEA, PhpStorm, WebStorm, PyCharm, RubyMine, AppCode, CLion, GoLand, DataGrip, Rider, MPS, Android Studio,
 DataSpell, Code With Me
 
@@ -81,7 +79,6 @@ Remember to set your OpenAI private token in plugin's settings: <kbd>Settings</k
 CommitGPT</kbd>
 
 ### Installation from zip
-
 1. Download zip from [releases](https://github.com/Marc-R2/ai-commits-intellij-plugin/releases)
 2. Import to IntelliJ: <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Cog</kbd> > <kbd>Install plugin from
    disk...</kbd>
