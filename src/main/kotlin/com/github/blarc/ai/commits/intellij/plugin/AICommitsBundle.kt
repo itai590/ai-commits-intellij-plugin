@@ -36,6 +36,4 @@ object AICommitsBundle : DynamicBundle(BUNDLE) {
     }
 
     fun plugin() = PluginManagerCore.getPlugin(PluginId.getId("com.github.marc-r2.commit_gpt-intellij-plugin"))
-
-
 }

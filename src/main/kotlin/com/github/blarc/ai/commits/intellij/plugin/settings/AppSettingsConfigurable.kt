@@ -38,6 +38,7 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
     override fun createPanel() = panel {
 
         group(JBLabel("OpenAI")) {
+            // Set OpenAI token
             row {
                 cell(tokenPasswordField)
                     .label(message("settings.openAIToken"))
@@ -52,12 +53,16 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
                     verifyToken()
                 }.align(AlignX.RIGHT)
             }
+
+            // Link to OpenAI API page
             row {
                 comment(message("settings.openAITokenComment"))
                     .align(AlignX.LEFT)
                 cell(verifyLabel)
                     .align(AlignX.RIGHT)
             }
+
+            // Set proxy
             row {
                 textField()
                     .label(message("settings.openAIProxy"))
@@ -68,16 +73,24 @@ class AppSettingsConfigurable : BoundConfigurable(message("settings.general.grou
         }
 
         group(JBLabel("Prompt")) {
+            // Set locale
             row {
-                comboBox(Locale.getAvailableLocales().toList().sortedBy { it.displayName }, AppSettingsListCellRenderer())
-                        .label(message("settings.locale"))
-                        .bindItem(AppSettings.instance::locale.toNullableProperty())
+                comboBox(
+                    Locale.getAvailableLocales().toList().sortedBy { it.displayName },
+                    AppSettingsListCellRenderer()
+                )
+                    .label(message("settings.locale"))
+                    .bindItem(AppSettings.instance::locale.toNullableProperty())
             }
+
+            /// Current Prompt selection
             row {
                 promptComboBox = comboBox(AppSettings.instance.prompts.values, AppSettingsListCellRenderer())
                     .label(message("settings.prompt"))
                     .bindItem(AppSettings.instance::currentPrompt.toNullableProperty())
             }
+
+            // Prompt table
             row {
                 toolbarDecorator = ToolbarDecorator.createDecorator(promptTable.table)
                     .setAddAction {

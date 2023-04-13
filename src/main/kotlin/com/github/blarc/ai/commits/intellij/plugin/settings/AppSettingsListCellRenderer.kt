@@ -16,12 +16,8 @@ class AppSettingsListCellRenderer : DefaultListCellRenderer() {
         cellHasFocus: Boolean
     ): Component {
         val component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus)
-        if (value is Locale) {
-            text = value.displayName
-        }
-        if (value is Prompt) {
-            text = value.name
-        }
+        if (value is Locale) text = value.displayName
+        if (value is Prompt) text = value.name
         return component
     }
 }

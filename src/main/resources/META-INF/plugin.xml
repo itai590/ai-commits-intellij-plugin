@@ -78,6 +78,7 @@
     </extensions>
 
     <actions>
+        <!-- Button to generate commit message -->
         <action
                 id="AICommit.Button"
                 text="CommitGPT"
