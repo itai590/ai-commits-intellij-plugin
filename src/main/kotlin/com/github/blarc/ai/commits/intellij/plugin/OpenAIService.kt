@@ -17,7 +17,7 @@ import com.knuddels.jtokkit.api.EncodingType
 class OpenAIService {
 
     companion object {
-        const val model = "gpt-3.5-turbo"
+        const val model = "gpt-4o"
         val instance: OpenAIService
             get() = ApplicationManager.getApplication().getService(OpenAIService::class.java)
     }
@@ -49,7 +49,7 @@ class OpenAIService {
             topP = 1.0,
             frequencyPenalty = 0.0,
             presencePenalty = 0.0,
-            maxTokens = 200,
+            maxTokens = 2048,
             n = completions
         )
 
