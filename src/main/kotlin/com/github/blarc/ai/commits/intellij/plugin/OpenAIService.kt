@@ -17,7 +17,7 @@ import com.knuddels.jtokkit.api.EncodingType
 class OpenAIService {
 
     companion object {
-        const val model = "gpt-4o"
+        const val model = "gpt-4o-mini"
         val instance: OpenAIService
             get() = ApplicationManager.getApplication().getService(OpenAIService::class.java)
     }
